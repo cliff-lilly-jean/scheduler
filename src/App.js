@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { collection, addDoc } from 'firebase/firestore';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DateTimePicker from '@mui/lab/DateTimePicker';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import db from './firebaseConfig';
 
 import './App.css';
 
 function App() {
  const [todoInput, setTodoInput] = useState('');
+ const [date, setDate] = useState('');
 
 
  const addTodo = async (e) => {
@@ -16,13 +20,15 @@ function App() {
   const payload = {
    inProgress: true,
    todo: todoInput,
-   // TODO: Add a date
+   deadlineDate: date,
+   timestamp: serverTimestamp()
   };
   await addDoc(collectionRef, payload);
  };
 
  return (
   <div className="todo-app">
+
    <h1>Scheduler</h1>
    <form className="todo-app__form" action="#">
     <TextField
@@ -33,23 +39,24 @@ function App() {
      value={todoInput}
      onChange={(e) => setTodoInput(e.target.value)}
     />
-    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
      <DateTimePicker
       renderInput={(props) => <TextField {...props}
        className="todo-app__text-field"
        id="standard-basic"
-       label="What's Next?"
+       label="Choose a deadline"
        variant="standard"
        onChange={(e) => setTodoInput(e.target.value)} />}
-      // label=""
-      value={todoInput}
+      label=""
+      value={date}
       onChange={(newValue) => {
        setDate(newValue);
       }}
      />
-    </LocalizationProvider> */}
+    </LocalizationProvider>
     <Button type='submit' variant="contained" onClick={addTodo}>Default</Button>
    </form >
+
   </div >
  );
 }
