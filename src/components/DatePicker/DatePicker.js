@@ -15,7 +15,7 @@ const DatePicker = () => {
  return (
   <div>
    <LocalizationProvider dateAdapter={AdapterDateFns}>
-    <DateTimePicker
+    {/* <DateTimePicker
      renderInput={(props) => <TextField {...props}
       // className="todo-app__text-field"
       // id="standard-basic"
@@ -27,8 +27,8 @@ const DatePicker = () => {
      onChange={(newValue) => {
       setDate(newValue);
      }}
-    />
-    {/* <StaticDatePicker
+    /> */}
+    <StaticDatePicker
      displayStaticWrapperAs="desktop"
      openTo="day"
      value={date}
@@ -36,8 +36,7 @@ const DatePicker = () => {
       setDate(newValue);
      }}
      renderInput={(params) => <TextField {...params} />}
-    /> */}
-
+    />
    </LocalizationProvider>
   </div>
  );
