@@ -19,3 +19,7 @@ flex-direction: column;
 /* .todo-app__form {
  display: flex;
 } */
+
+.input-adornment {
+ text-align: right;
+}
