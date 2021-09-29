@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import DatePicker from './components/DatePicker/DatePicker';
-import InputField from './components/InputField/InputField';
 
+// MATERIAL UI
+import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
-
 
 // FIREBASE
 import { collection, addDoc, serverTimestamp, onSnapshot, getDoc } from 'firebase/firestore';
@@ -14,40 +13,57 @@ import './App.css';
 
 function App() {
 
+ // USE STATE
+ const [todoInput, setTodoInput] = useState('');
+ const [todos, setTodos] = useState([]);
 
- const [newDate, setNewDate] = useState('');
- const [newInputValue, setNewInputValue] = useState('');
- const [showDatePicker, setShowDatePicker] = useState(false);
- const [showInputField, setShowInputField] = useState(true);
-
- const displayDatePicker = () => {
-  setShowDatePicker(true);
-  setShowInputField(false);
-  addTodo();
- };
-
+ // USE EFFECT
+ useEffect(() =>
+  onSnapshot(collection(db, 'todos'), (snapshot) =>
+   setTodos(snapshot.docs.map(doc => doc.data()))
+  ),
+  []);
 
  const addTodo = async (e) => {
-  // e.preventDefault();
+  e.preventDefault();
   const collectionRef = collection(db, "todos");
   const payload = {
    inProgress: true,
-   todo: newInputValue,
-   deadlineDay: newDate,
+   todo: todoInput,
    timestamp: serverTimestamp()
   };
   await addDoc(collectionRef, payload);
+  setTodoInput('');
  };
+
+ // TODO: FIND OUT WHY THE ONSNAPSHOT FIREBASE CALL IS RUNNING TWICE
 
  return (
 
   <div className="todo-app" >
    <h1>Scheduler</h1>
    <form action="">
-    {showInputField ? <InputField setTodoInput={newInputValue => setNewInputValue(newInputValue)} /> : null}
-    {showDatePicker ? <DatePicker setDate={newDate => setNewDate(newDate)} /> : null}
-    {/* <Button type='submit' variant="contained" onClick={displayDatePicker} style={{ 'display': 'none' }}>Default</Button> */}
+    {/* TEXTFIELD */}
+    <TextField className="todo-app__text-field"
+     id="standard-basic"
+     label="What's Next?"
+     variant="standard"
+     value={todoInput}
+     onChange={(e) => {
+      setTodoInput(e.target.value);
+     }}
+    />
+    {/* BUTTON */}
+    <Button type='submit' variant="contained" onClick={addTodo} style={{ 'display': 'none' }}>Default</Button>
    </form>
+   <div className="todos-container">
+    {todos.map((todo) => (
+     <li>
+      {todo.todo}
+
+     </li>
+    ))}
+   </div>
   </div >
  );
 }
