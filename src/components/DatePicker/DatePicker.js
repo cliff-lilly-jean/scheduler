@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import InputField from '../InputField/InputField';
 
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -8,35 +9,41 @@ import StaticDatePicker from '@mui/lab/StaticDatePicker';
 
 
 
-const DatePicker = () => {
+const DatePicker = (props) => {
 
  const [date, setDate] = useState('');
+ const [showInputField, setShowInputField] = useState(true);
+ const [newInputValue, setNewInputValue] = useState('');
 
  return (
-  <div>
+  <div className='date-picker'>
    <LocalizationProvider dateAdapter={AdapterDateFns}>
-    {/* <DateTimePicker
-     renderInput={(props) => <TextField {...props}
-      // className="todo-app__text-field"
-      // id="standard-basic"
+    <DateTimePicker
+     renderInput={(props) => showInputField ? <InputField {...props}
+      setTodoInput={newInputValue => setNewInputValue(newInputValue)}
       label="Choose a deadline"
       variant="standard"
-     />}
+     /> : null}
      label=""
      value={date}
      onChange={(newValue) => {
-      setDate(newValue);
+      props.setDate(newValue);
      }}
-    /> */}
-    <StaticDatePicker
+    />
+
+
+    <InputField setTodoInput={newInputValue => setNewInputValue(newInputValue)} />
+
+
+    {/* <StaticDatePicker
      displayStaticWrapperAs="desktop"
      openTo="day"
      value={date}
      onChange={(newValue) => {
-      setDate(newValue);
+      props.setDate(newValue);
      }}
      renderInput={(params) => <TextField {...params} />}
-    />
+    /> */}
    </LocalizationProvider>
   </div>
  );
