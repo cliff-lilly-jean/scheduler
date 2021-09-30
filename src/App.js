@@ -10,6 +10,7 @@ import db from './firebaseConfig';
 
 // CSS
 import './App.css';
+import id from 'date-fns/esm/locale/id/index.js';
 
 function App() {
 
@@ -18,11 +19,21 @@ function App() {
  const [todos, setTodos] = useState([]);
 
  // USE EFFECT
- useEffect(() =>
-  onSnapshot(collection(db, 'todos'), (snapshot) =>
-   setTodos(snapshot.docs.map(doc => doc.data()))
-  ),
-  []);
+ useEffect(() => {
+  getTodos();
+ }, []);
+
+ const getTodos = () => {
+  onSnapshot(collection(db, 'todos'), (snapshot) => {
+   setTodos(snapshot.docs.map(doc => ({
+    id: doc.id,
+    todo: doc.data().todo,
+    inProgress: doc.data().inProgress
+   }))
+   );
+  });
+ };
+
 
  const addTodo = async (e) => {
   e.preventDefault();
@@ -42,7 +53,7 @@ function App() {
 
   <div className="todo-app" >
    <h1>Scheduler</h1>
-   <form action="">
+   <form className="todo-app__form">
     {/* TEXTFIELD */}
     <TextField className="todo-app__text-field"
      id="standard-basic"
@@ -54,18 +65,15 @@ function App() {
      }}
     />
     {/* BUTTON */}
-    <Button type='submit' variant="contained" onClick={addTodo} style={{ 'display': 'none' }}>Default</Button>
+    <Button className='button' type='submit' variant="contained" onClick={addTodo} style={{ 'display': 'none' }}>Default</Button>
    </form>
    <div className="todos-container">
     {todos.map((todo) => (
-     <li>
-      {todo.todo}
-
-     </li>
+     <p>{todo.todo}</p>
     ))}
    </div>
   </div >
  );
-}
+};
 
 export default App;
