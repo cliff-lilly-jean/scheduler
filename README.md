@@ -1,8 +1,5 @@
 # Description
-A scheduler app that starts a 25 minute clock on the first item once you select completed list. The app highlights
-the current item and runs until 0, then alerts you and moves/highlights the next item in the list and repeats until the end
-of the list. Once the list end is reached, the timer resets and a countdown is implemented calculated by the number of items that were in the list to start. If you still have items in the list, the highlight moves back to the top of
-the list and starts the process again until the list is empty.
+A scheduler app that starts a 25 minute clock on the first item once you select completed list. The app highlights the current item and runs until 0, then alerts you and moves/highlights the next item in the list and repeats until the end of the list. Once the list end is reached, the timer resets and a countdown is implemented calculated by the number of items that were in the list to start. If you still have items in the list, the highlight moves back to the top of the list and starts the process again until the list is empty.
 
 # Getting Started with Create React App
 

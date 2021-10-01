@@ -3,34 +3,3 @@
 * {
   font-family: "Poppins", sans-serif;
 }
-
-.todo-app {
- display: flex;
- justify-content: center;
-align-items: center;
-flex-direction: column;
-max-width: 1200px;
-margin: 0 auto;
-flex-wrap: wrap;
-}
-
-.todo-app__text-field {
- max-width: 300px;
- width: 100%;
-}
-
-.todo-app__form {
- max-width: 700px;
- width: 100%;
- margin: 0 auto;
- text-align: center;
-}
-
-.button {
- max-width: 100px;
-}
-
-.todos-container {
- max-width: 300px;
- width: 100%;
-}

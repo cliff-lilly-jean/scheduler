@@ -6,12 +6,11 @@ import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
 
 // FIREBASE
-import { collection, addDoc, serverTimestamp, onSnapshot, getDoc } from 'firebase/firestore';
+import { collection, addDoc, serverTimestamp, onSnapshot } from 'firebase/firestore';
 import db from './firebaseConfig';
 
 // CSS
 import './App.css';
-import id from 'date-fns/esm/locale/id/index.js';
 
 
 function App() {
@@ -36,7 +35,6 @@ function App() {
   });
  };
 
-
  const addTodo = async (e) => {
   e.preventDefault();
   const collectionRef = collection(db, "todos");
@@ -53,23 +51,24 @@ function App() {
 
  return (
 
-  <div className="todo-app" >
+  <div className="todo-app" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
    <h1>Scheduler ⏰ </h1>
-   <form className="todo-app__form">
+   <form className="todo-app__form" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
     {/* TEXTFIELD */}
     <TextField className="todo-app__text-field"
      id="standard-basic"
-     label="What's Next?"
+     label="What's Today's Plan?"
      variant="standard"
      value={todoInput}
      onChange={(e) => {
       setTodoInput(e.target.value);
      }}
+     style={{ maxWidth: '300px', width: '90vw' }}
     />
     {/* BUTTON */}
     <Button className='button' type='submit' variant="contained" onClick={addTodo} style={{ 'display': 'none' }}>Default</Button>
    </form>
-   <div className="todos-container">
+   <div className="todos-container" style={{ marginTop: '30px' }}>
     {todos.map((todo) => (
      <Todo todo={todo.todo} inProgress={todo.inProgress} id={todo.id} />
     ))}
