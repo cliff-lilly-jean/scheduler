@@ -60,7 +60,6 @@ function App() {
     {todos.map((todo) => (
      <li>
       {todo.todo}
-
      </li>
     ))}
    </div>
