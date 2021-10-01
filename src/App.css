@@ -9,17 +9,28 @@
  justify-content: center;
 align-items: center;
 flex-direction: column;
+max-width: 1200px;
+margin: 0 auto;
+flex-wrap: wrap;
 }
 
 .todo-app__text-field {
- max-width: 400px;
+ max-width: 300px;
  width: 100%;
 }
 
-/* .todo-app__form {
- display: flex;
-} */
+.todo-app__form {
+ max-width: 700px;
+ width: 100%;
+ margin: 0 auto;
+ text-align: center;
+}
 
-.input-adornment {
- text-align: right;
+.button {
+ max-width: 100px;
+}
+
+.todos-container {
+ max-width: 300px;
+ width: 100%;
 }

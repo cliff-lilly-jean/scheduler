@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Todo from './components/Todo/Todo';
 
 // MATERIAL UI
 import { TextField } from '@mui/material';
@@ -10,6 +11,8 @@ import db from './firebaseConfig';
 
 // CSS
 import './App.css';
+import id from 'date-fns/esm/locale/id/index.js';
+
 
 function App() {
 
@@ -18,11 +21,21 @@ function App() {
  const [todos, setTodos] = useState([]);
 
  // USE EFFECT
- useEffect(() =>
-  onSnapshot(collection(db, 'todos'), (snapshot) =>
-   setTodos(snapshot.docs.map(doc => doc.data()))
-  ),
-  []);
+ useEffect(() => {
+  getTodos();
+ }, []);
+
+ const getTodos = () => {
+  onSnapshot(collection(db, 'todos'), (snapshot) => {
+   setTodos(snapshot.docs.map(doc => ({
+    id: doc.id,
+    todo: doc.data().todo,
+    inProgress: doc.data().inProgress
+   }))
+   );
+  });
+ };
+
 
  const addTodo = async (e) => {
   e.preventDefault();
@@ -42,7 +55,7 @@ function App() {
 
   <div className="todo-app" >
    <h1>Scheduler</h1>
-   <form action="">
+   <form className="todo-app__form">
     {/* TEXTFIELD */}
     <TextField className="todo-app__text-field"
      id="standard-basic"
@@ -54,17 +67,15 @@ function App() {
      }}
     />
     {/* BUTTON */}
-    <Button type='submit' variant="contained" onClick={addTodo} style={{ 'display': 'none' }}>Default</Button>
+    <Button className='button' type='submit' variant="contained" onClick={addTodo} style={{ 'display': 'none' }}>Default</Button>
    </form>
    <div className="todos-container">
     {todos.map((todo) => (
-     <li>
-      {todo.todo}
-     </li>
+     <Todo todo={todo.todo} inProgress={todo.inProgress} id={todo.id} />
     ))}
    </div>
   </div >
  );
-}
+};
 
 export default App;
