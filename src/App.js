@@ -54,7 +54,7 @@ function App() {
  return (
 
   <div className="todo-app" >
-   <h1>Scheduler</h1>
+   <h1>Scheduler ⏰ </h1>
    <form className="todo-app__form">
     {/* TEXTFIELD */}
     <TextField className="todo-app__text-field"
