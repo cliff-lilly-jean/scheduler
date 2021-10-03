@@ -11,6 +11,7 @@ import db from './firebaseConfig';
 
 // CSS
 import './App.css';
+import Countdown from './components/Countdown/Countdown';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
  // USE STATE
  const [todoInput, setTodoInput] = useState('');
  const [todos, setTodos] = useState([]);
+ const [schedule, setSchedule] = useState('');
 
  // USE EFFECT
  useEffect(() => {
@@ -44,7 +46,13 @@ function App() {
    timestamp: serverTimestamp()
   };
   await addDoc(collectionRef, payload);
+  // setTodos(payload);
+  console.log(todos);
   setTodoInput('');
+ };
+
+ const lockInSchedule = () => {
+  console.log('schedule');
  };
 
  // TODO: FIND OUT WHY THE ONSNAPSHOT FIREBASE CALL IS RUNNING TWICE
@@ -73,6 +81,8 @@ function App() {
      <Todo todo={todo.todo} inProgress={todo.inProgress} id={todo.id} />
     ))}
    </div>
+   <Button className='button' type='submit' variant="contained" onClick={lockInSchedule} style={{ marginTop: '30px' }}>Lock in schedule</Button>
+   <Countdown />
   </div >
  );
 };
