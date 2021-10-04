@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Countdown = () => {
 
  const [countdown, setCountdown] = useState('');
+
 
  const startingMinutes = 25;
  let time = startingMinutes * 60;
@@ -10,19 +11,22 @@ const Countdown = () => {
  const minutes = Math.floor(time / 60);
  let seconds = time % 60;
 
+ let timer = `${minutes}: ${seconds}`;
+
 
 
  const updateCountdown = () => {
-  let timer = `${minutes}: ${seconds}`;
-  time--;
+  timer--;
  };
 
  setInterval(updateCountdown, 1000);
 
+
+
  return (
   <div className="countdown">
-   This is the countdown&nbsp;
-   {minutes}: {'0' ? '00' : { seconds }}
+
+   {timer}
    &nbsp;
   </div>
  );
