@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Button } from '@mui/material';
 
 
-const Countdown = ({ countdownTime, displayTimer }) => {
+const Countdown = (props) => {
 
  const [minutes, setMinutes] = useState(25);
  const [seconds, setSeconds] = useState(0);
@@ -27,20 +28,21 @@ const Countdown = ({ countdownTime, displayTimer }) => {
   }
  };
 
- useEffect(() => {
+ // useEffect(() => {
+
+ // }, [seconds]);
+
+ let runTimer = () => {
   let interval = setInterval(() => {
-   if (displayTimer === true) {
-    clearInterval(interval);
-    startTimer();
-   } else {
-    console.log('the timer is not loaded');
-   }
+   startTimer();
+   clearInterval(interval);
   }, 1000);
- }, [seconds]);
+ };
 
  return (
   <div className="countdown">
-   {displayTimer ? <div>{timerMinutes}:{timerSeconds}</div> : <div>Once you lock in your scheule the timer will start</div>}
+   {displayTimer ? <Button className='button' type='submit' variant="contained" onClick={props.timerStart} style={{ marginTop: '30px' }}>Lock in schedule</Button> : <Button className='button' type='submit' variant="contained" onClick={props.timerStart} style={{ marginTop: '30px' }}>Pause</Button>}
+   <div>{timerMinutes}:{timerSeconds}</div>
    {displayMessage && <div>Break Time! Work on next task in</div>}
   </div>
  );

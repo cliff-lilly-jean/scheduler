@@ -52,9 +52,14 @@ function App() {
   setTodoInput('');
  };
 
- const lockInSchedule = () => {
+ const startTimer = () => {
   setDisplayTimer(!displayTimer);
  };
+
+ const pauseClock = () => {
+  setDisplayTimer(!displayTimer);
+ };
+
 
  // TODO: FIND OUT WHY THE ONSNAPSHOT FIREBASE CALL IS RUNNING TWICE
 
@@ -82,8 +87,7 @@ function App() {
      <Todo todo={todo.todo} inProgress={todo.inProgress} id={todo.id} />
     ))}
    </div>
-   <Button className='button' type='submit' variant="contained" onClick={lockInSchedule} style={{ marginTop: '30px' }}>Lock in schedule</Button>
-   <Countdown displayTimer={displayTimer} />
+   {!displayTimer ? <Countdown displayTimer={displayTimer} timerStart={startTimer} /> : 'Please lock in your schedule'}
   </div >
  );
 };
