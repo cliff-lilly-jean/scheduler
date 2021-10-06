@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Todo from './components/Todo/Todo';
 
+
 // MATERIAL UI
 import { TextField } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -19,7 +20,7 @@ function App() {
  // USE STATE
  const [todoInput, setTodoInput] = useState('');
  const [todos, setTodos] = useState([]);
- const [schedule, setSchedule] = useState('');
+ const [displayTimer, setDisplayTimer] = useState(false);
 
  // USE EFFECT
  useEffect(() => {
@@ -52,7 +53,7 @@ function App() {
  };
 
  const lockInSchedule = () => {
-  console.log('schedule');
+  setDisplayTimer(!displayTimer);
  };
 
  // TODO: FIND OUT WHY THE ONSNAPSHOT FIREBASE CALL IS RUNNING TWICE
@@ -82,7 +83,7 @@ function App() {
     ))}
    </div>
    <Button className='button' type='submit' variant="contained" onClick={lockInSchedule} style={{ marginTop: '30px' }}>Lock in schedule</Button>
-   <Countdown />
+   <Countdown displayTimer={displayTimer} />
   </div >
  );
 };
