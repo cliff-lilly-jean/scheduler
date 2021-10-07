@@ -47,14 +47,13 @@ function App() {
    timestamp: serverTimestamp()
   };
   await addDoc(collectionRef, payload);
-  // setTodos(payload);
-  console.log(todos);
   setTodoInput('');
  };
 
- const lockInSchedule = () => {
-  setDisplayTimer(!displayTimer);
- };
+ // const lockInSchedule = () => {
+ //  setDisplayTimer(!displayTimer);
+ //  console.log(!displayTimer);
+ // };
 
  // TODO: FIND OUT WHY THE ONSNAPSHOT FIREBASE CALL IS RUNNING TWICE
 
@@ -82,8 +81,8 @@ function App() {
      <Todo todo={todo.todo} inProgress={todo.inProgress} id={todo.id} />
     ))}
    </div>
-   <Button className='button' type='submit' variant="contained" onClick={lockInSchedule} style={{ marginTop: '30px' }}>Lock in schedule</Button>
-   <Countdown displayTimer={displayTimer} />
+   {/* <Button className='button' type='submit' variant="contained" onClick={lockInSchedule} style={{ marginTop: '30px' }}>Lock in schedule</Button> */}
+   <Countdown />
   </div >
  );
 };
