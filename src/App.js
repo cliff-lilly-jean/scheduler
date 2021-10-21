@@ -46,8 +46,6 @@ function App() {
    timestamp: serverTimestamp()
   };
   await addDoc(collectionRef, payload);
-  // setTodos(payload);
-  console.log(todos);
   setTodoInput('');
  };
 
