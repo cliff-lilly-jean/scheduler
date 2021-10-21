@@ -16,5 +16,4 @@ return (
  </div>
 );
 
-
 export default Countdown;
