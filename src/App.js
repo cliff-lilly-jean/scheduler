@@ -20,7 +20,6 @@ function App() {
  // USE STATE
  const [todoInput, setTodoInput] = useState('');
  const [todos, setTodos] = useState([]);
- const [displayTimer, setDisplayTimer] = useState(false);
 
  // USE EFFECT
  useEffect(() => {
@@ -52,15 +51,6 @@ function App() {
   setTodoInput('');
  };
 
- const startTimer = () => {
-  setDisplayTimer(!displayTimer);
- };
-
- const pauseClock = () => {
-  setDisplayTimer(!displayTimer);
- };
-
-
  // TODO: FIND OUT WHY THE ONSNAPSHOT FIREBASE CALL IS RUNNING TWICE
 
  return (
@@ -87,7 +77,7 @@ function App() {
      <Todo todo={todo.todo} inProgress={todo.inProgress} id={todo.id} />
     ))}
    </div>
-   {!displayTimer ? <Countdown displayTimer={displayTimer} timerStart={startTimer} /> : 'Please lock in your schedule'}
+   <Countdown />
   </div >
  );
 };
