@@ -13,6 +13,7 @@ import db from './firebaseConfig';
 // CSS
 import './App.css';
 import Countdown from './components/Countdown/Countdown';
+import SetPomodoro from './components/SetPomodoro/SetPomodoro';
 
 
 function App() {
@@ -76,6 +77,7 @@ function App() {
     ))}
    </div>
    <Countdown />
+   <SetPomodoro />
   </div >
  );
 };
