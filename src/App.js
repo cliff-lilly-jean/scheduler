@@ -77,7 +77,6 @@ function App() {
     ))}
    </div>
    <Countdown />
-   <SetPomodoro />
   </div >
  );
 };
